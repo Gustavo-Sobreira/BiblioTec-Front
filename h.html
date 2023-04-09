@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Biblioteca Escolar</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="j.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+
+  </head>
+  <body>
+    <nav>
+        <h1>BiblioTec</h1>
+        <div class="menu">
+          <ul>
+            <li>
+              <button type="button" class="nav-button" onclick="abrirPaginaAluno()">Aluno</button>
+            </li>
+            <li>
+              <button type="button" class="nav-button" onclick="abrirPaginaLivro()">Livro</button>
+            </li>
+            <li>
+              <button type="button" class="nav-button" onclick="abrirPaginaEmprestimo()">Emprestimo</button>
+            </li>
+          </ul>
+          <button id="b-pendentes" onclick="abrirPaginaPendentes(),listarPendentes()">!</button>
+        </div>
+    </nav>
+
+    <div id="p-aluno" class="hidden">
+
+      <div id="buscar-aluno" class="fundo-card">
+        <h2>Buscar Aluno</h2>
+        <form id="form-buscar-aluno" class="form-clean">
+          <label for="matriculaBusca">Matrícula</label>
+            <input type="number" id="matriculaBusca" name="matricula">
+            <button type="button" onclick="buscarAluno()">Buscar</button>
+        </form>
+      </div>
+
+      <div name="resultado-busca-aluno" class="fundo-card">
+        <h2>Aluno Encontrado</h2>
+        <div id="resultado-buscar-aluno" class="resultado-form resultado-em-lista">
+        </div>
+      </div>
+      
+      
+      <div id="cadastrar-aluno" class="fundo-card">
+        <h2>Cadastrar Aluno</h2>
+        <form id="form-cadastrar-auluno" class="form-clean">
+          <label for="matriculaCad">Matrícula</label>
+          <input type="number" id="matriculaCad" name="matricula">
+
+          <label for="nomeCad">Nome</label>
+          <input type="text" id="nomeCad" name="nome">
+
+          <label for="salaCad">Sala</label>
+          <input type="number" id="salaCad" name="sala">
+
+          <label for="turno">Turno</label>
+          <select id="turno" name="turno">
+            <option value="1">Manhã</option>
+            <option value="2">Tarde</option>
+          </select>
+
+          <button type="button" onclick="cadastrarAluno()">Cadastrar</button>
+        </form>
+      </div>
+
+      <div name="resultado-cadastrar-aluno" class="fundo-card">
+        <h2>Aluno Cadastrado</h2>
+        <div id="resultado-cadastrar-aluno"" class="resultado-form resultado-em-lista">
+        </div>
+      </div>
+
+    
+      <div id="editar-aluno" class="fundo-card">
+        <h2>Editar Aluno</h2>
+          <form id="form-editar-aluno" class="form-clean">
+            <label for="matriculaEdit">Matrícula</label>
+            <input type="number" id="matriculaEdit" name="matricula">
+           
+            <label for="nomeEdit">Nome</label>
+            
+            <input type="text" id="nomeEdit" name="nome">
+            <label for="salaEdit">Sala</label>
+            <input type="number" id="salaEdit" name="sala">
+
+            <label for="turnoEdit">Turno</label>
+            <select id="turnoEdit" name="turno">
+              <option value="1">Manhã</option>
+              <option value="2">Tarde</option>
+            </select>
+
+            <button type="button" onclick="editarAluno()">Editar</button>
+          </form>
+      </div>
+
+      <div name="resultado-editar-aluno" class="fundo-card">
+        <h2>Aluno Editado</h2>
+        <div id="resultado-editar-aluno" class="resultado-form resultado-em-lista">
+        </div>
+      </div>
+
+      
+      <div id="apagar-aluno" class="fundo-card">
+        <h2>Remover aluno</h2>
+        <form id="form-apagar-aluno" class="form-clean">
+          <label for="idDeletar">Matrícula</label>
+          <input type="number" id="idDeletar" name="idDeletar">
+          <button type="button" onclick="confirmarAlunoParaRemocao()">Remover</button>
+        </form>          
+      </div>
+
+      <div name="resultado-apagar-aluno" class="fundo-card">
+        <h2>Aluno Apagado</h2>
+        <div id="resultado-apagar-aluno" class="resultado-form resultado-em-lista">
+        </div>
+      </div>
+      
+    </div>
+
+
+    <div id="p-livro" class="hidden">
+
+      <div id="buscar-livro" class="fundo-card">
+        <h2>Buscar Livros</h2>
+        <form id="form-buscar-livro" class="form-clean">
+          <label for="tituloBusca">Titulo</label>
+          <input type="text" id="tituloBusca" name="Titulo">
+          <button type="button" onclick="buscarLivros()">Buscar</button>
+        </form>
+      </div>
+
+      <div name="resultado-buscar-livro" class="fundo-card">
+        <h2>Disponíveis em Estoque</h2>
+        <div class="resultado-form resltado-form-limite">
+          <ul class="indicador-resultado-buscar-livro">
+            <li>Título</li>
+            <li>Autor</li>
+            <li>Quant.</li=>
+          </ul>
+          <div id="resultado-buscar-livro" style="width: 100%;"></div>
+        </div>
+      </div>
+      
+
+      <div id="cadastrar-livro" class="fundo-card">
+        <h2>Cadastrar Livro</h2>
+        <form id="form-cadastrar-livro" class="form-clean">
+          <label for="RegistroCad">Registro</label>
+          <input type="number" id="RegistroCad" name="Registro">
+          
+          <label for="tituloCad">Titulo</label>
+          <input type="text" id="tituloCad" name="Titulo">
+          
+          <label for="autorCad">Autor</label>
+          <input type="text" id="autorCad" name="Autor">
+          <button type="button" onclick="cadastrarLivro()">Cadastrar</button>
+        </form>
+      </div>
+      
+      <div name="resultado-cadastrar-livro" class="fundo-card">
+        <h2>Livro Cadastrado</h2>
+        <div class="resultado-form">
+          <ul class="indicador-resultado-buscar-livro">
+            <li>Resgistro</li>
+            <li>Título</li>
+            <li>Autor</li>
+          </ul>
+          <div id="resultado-cadastrar-livro" style="width: 100%;"></div>
+        </div>
+      </div>
+      
+
+      <div id="editar-livro" class="fundo-card">
+        <h2>Editar Livro</h2>
+        <form id="form-editar-livro" class="form-clean">
+          <label for="registroEdit">Registro</label>
+          <input type="number" id="registroEdit" name="Registro">
+          <label for="tituloEdit">Titulo</label>
+          <input type="text" id="tituloEdit" name="Titulo">
+          <label for="autorEdit">Autor</label>
+          <input type="text" id="autorEdit" name="autor">
+          <button type="button" onclick="editarLivro()">Editar</button>
+        </form>
+      </div>
+
+      <div name="resultado-editar-livro" class="fundo-card">
+        <h2>Livro Editado</h2>
+        <div class="resultado-form">
+          <ul class="indicador-resultado-buscar-livro">
+            <li>Resgistro</li>
+            <li>Título</li>
+            <li>Autor</li>
+          </ul>
+          <div id="resultado-editar-livro" style="width: 100%;"></div>
+        </div>
+      </div>
+      
+
+      <div id="apagar-livro" class="fundo-card">
+        <h2>Remover Livro</h2>
+        <form id="form-apagar-livro" class="form-clean">
+          <label for="RegistroDeletar">Registro</label>
+          <input type="number" id="RegistroDeletar" name="Registro">
+          <button type="button" onclick="confirmarRemocaoLivro()">Remover</button>
+        </form>          
+      </div>
+
+      <div name="resultado-apagar-livro" class="fundo-card">
+        <h2>Livro Apagado</h2>
+        <div class="resultado-form">
+          <ul class="indicador-resultado-buscar-livro">
+            <li>Registro</li>
+            <li>Título</li>
+            <li>Autor</li>
+          </ul>
+          <div id="resultado-apagar-livro" style="width: 100%;"></div>
+        </div>
+      </div>
+    
+    </div>
+
+    <div id="p-emprestimo"class="p-emprestimo">
+
+      <div id="emprestar-livro" class="fundo-card">
+        <h2>Emprestar</h2>
+        <form class="form-clean" id="realizar-emprestimo">
+          <label>Matrícula</label>
+          <input type="number" id="MatriculaEmprestimo"/>
+          <label>Registro</label>
+          <input type="number" id="RegistroEmprestimo"/>
+          <button type="button" onclick="realizarEmprestimo()">Emprestar</button>
+        </form>
+      </div>
+
+      <div name="resultado-emprestar-livro" class="fundo-card">
+        <h2>Empréstimo</h2>
+        <div class="resultado-form" id="resultado-emprestar-livro"></div>
+      </div>
+
+      <div id="devolver-livro" class="fundo-card">
+        <h2>Devolver</h2>
+        <form class="form-clean">
+          <label>Matrícula</label>
+          <input type="number" id="MatriculaDevolucao"/>
+          <label>Registro</label>
+          <input type="number" id="RegistroDevolucao"/>
+          <button type="button" onclick="realizarDevolucao()">Emprestar</button>
+        </form>
+      </div>
+
+      <div name="resultado-devolver-livro" class="fundo-card">
+        <h2>Devolução</h2>
+        <div class="resultado-form" id="resultado-devolver-livro"></div>
+      </div>
+    </div>
+    
+    <div id="p-pendentes" class="hidden">
+
+      <div id="filtrar-pendencias" class="fundo-card">
+        <h2>Alunos Pendentes</h2>
+        <form id="form-filtrar-pendencia" class="form-clean-pendentes">
+          <label for="tempoPendencia">Tempo</label>
+          <select id="tempoPendencia" name="tempoPendencia">
+            <option value="0"> - // -</option>
+            <option value="15">15 Dias</option>
+            <option value="20">20 Dias</option>
+            <option value="30">1 Mês</option>
+            <option value="60">2 Meses</option>
+            <option value="180">6 Meses</option>
+          </select>
+
+          <label for="turnoPendencia">Turno</label>
+          <select id="turnoPendencia" name="turnoPendencia">
+            <option value="0"> - // -</option>
+            <option value="1">Manhã</option>
+            <option value="2">Tarde</option>
+          </select>
+
+          <label for="salaPendencia">Sala</label>
+          <input type="number" id="salaPendencia" value="0" placeholder=" - // -"/>
+
+          <button type="button" onclick="listarPendentes()">Buscar</button>
+        </form>
+      </div>
+
+      <div id="listar-pendentes" class="fundo-card">
+        <ul class="indicador-resultado-buscar-livro">
+          <li>Aluno</li>
+          <li>Sala</li>
+          <li>Turno</li>
+          <li>Registro Livro</li>
+          <li>Dia</li>
+        </ul>
+        <div id="resultado-todos-pendentes"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+  <footer>Ee Professor José Eutrópio - Gustavo Sobreira - 2023</footer>
+</html>
