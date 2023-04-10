@@ -197,14 +197,13 @@ function apagarAluno(){
 // LIVRO SERVICES
 function buscarLivros(){
   const livroPesquisado = document.getElementById('tituloBusca').value;
-  
-  const pesquisaFormatada = formatarTextos(livroPesquisado)
+  const pesquisaFormatada = formatarTextos(livroPesquisado);
+  const estoqueLista = document.getElementById('resultado-buscar-livro');
 
   fetch(`${url}/livro/estoque`)
     .then(response => response.json())
     .then(data => 
       {
-        const estoqueLista = document.getElementById('resultado-buscar-livro');
         let livroHtml = "";
         data.value.forEach(item => 
         {
@@ -221,7 +220,10 @@ function buscarLivros(){
         estoqueLista.innerHTML = livroHtml;
       }
     )
-  .catch(error => console.log(error));
+  .catch
+  {
+    estoqueLista.innerHTML = "Nenhum livro disponível para empréstimo.";
+  }
   }
 
 function formatarTextos(campoEmVerificacao) 
